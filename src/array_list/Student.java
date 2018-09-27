@@ -1,4 +1,4 @@
-package com.yucai.array_list;
+package array_list;
 
 public class Student {
 

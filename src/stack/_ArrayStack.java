@@ -1,6 +1,6 @@
-package com.yucai.stack;
+package stack;
 
-import com.yucai.array_list._ArrayList;
+import array_list._ArrayList;
 
 public class _ArrayStack<E> implements _Stack<E> {
 

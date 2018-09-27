@@ -1,4 +1,4 @@
-package com.yucai.stack;
+package stack;
 
 public interface _Stack<E> {
 
