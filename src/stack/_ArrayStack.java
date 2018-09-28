@@ -46,7 +46,7 @@ public class _ArrayStack<E> implements _Stack<E> {
     @Override
     public String toString() {
         StringBuilder stb = new StringBuilder();
-        stb.append("_Stack: ");
+        stb.append("_ArrayStack: ");
         stb.append("[");
 
         for(int i = 0; i < array.getSize(); i ++) {
