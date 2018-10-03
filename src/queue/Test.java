@@ -14,12 +14,12 @@ public class Test {
         _ArrayQueue<Integer> arrayQueue = new _ArrayQueue<>();
         _LoopQueue<Integer> loopQueue = new _LoopQueue<>();
 
-        int count = 1000000;
+        int count = 100000;
 
         double time1 = computeTime(arrayQueue, count);
-        double time2 = computeTime(loopQueue, count);
-
         System.out.println("_ArrayQueue: " + time1);
+
+        double time2 = computeTime(loopQueue, count);
         System.out.println("_LoopQueue: " + time2);
     }
 
