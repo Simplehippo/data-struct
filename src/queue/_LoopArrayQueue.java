@@ -1,21 +1,21 @@
 package queue;
 
 
-public class _LoopQueue<E> implements _Queue<E> {
+public class _LoopArrayQueue<E> implements _Queue<E> {
 
     private E[] data;
     private int front;
     private int tail;
     private int size;
 
-    public _LoopQueue(int capacity) {
+    public _LoopArrayQueue(int capacity) {
         data = (E[])new Object[capacity + 1];
         front = 0;
         tail = 0;
         size = 0;
     }
 
-    public _LoopQueue() {
+    public _LoopArrayQueue() {
         this(10);
     }
 
@@ -79,7 +79,7 @@ public class _LoopQueue<E> implements _Queue<E> {
     @Override
     public String toString() {
         StringBuilder stb = new StringBuilder();
-        stb.append(String.format("_LoopQueue: size is %d, capacity is %d", size, getCapacity()));
+        stb.append(String.format("_LoopArrayQueue: size is %d, capacity is %d", size, getCapacity()));
         stb.append("\n");
         stb.append("front [");
         for(int i = front; i != tail; i = (i + 1) % data.length) {

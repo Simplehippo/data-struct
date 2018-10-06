@@ -12,7 +12,7 @@ public class Test {
 
     public static void test_time() {
         _ArrayQueue<Integer> arrayQueue = new _ArrayQueue<>();
-        _LoopQueue<Integer> loopQueue = new _LoopQueue<>();
+        _LoopArrayQueue<Integer> loopQueue = new _LoopArrayQueue<>();
         _LinkedListQueue<Integer> linkedListQueue = new _LinkedListQueue<>();
 
         int count = 100000;
@@ -21,7 +21,7 @@ public class Test {
         System.out.println("_ArrayQueue: " + time1);
 
         double time2 = computeTime(loopQueue, count);
-        System.out.println("_LoopQueue: " + time2);
+        System.out.println("_LoopArrayQueue: " + time2);
 
         double time3 = computeTime(linkedListQueue, count);
         System.out.println("linkedListQueue: " + time3);
@@ -58,7 +58,7 @@ public class Test {
     }
 
     public static void test_LoopQueue() {
-        _LoopQueue<Integer> queue = new _LoopQueue<>();
+        _LoopArrayQueue<Integer> queue = new _LoopArrayQueue<>();
 
         for(int i = 0; i < 3; i ++) {
             queue.enqueue(i);
