@@ -1,6 +1,6 @@
-package linked_list;
+package stack;
 
-import stack._Stack;
+import linked_list._LinkedList;
 
 public class _LinkedListStack<E> implements _Stack<E> {
 
