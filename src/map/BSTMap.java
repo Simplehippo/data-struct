@@ -1,53 +1,50 @@
-package set;
+package map;
 
-public class BSTSet<E extends Comparable<E>> implements Set<E> {
+public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     private TreeNode root;
     private int size;
 
-    public BSTSet() {
+    public BSTMap() {
         size = 0;
     }
 
-    private TreeNode getNode(E e) {
-        return getNode(root, e);
-    }
-
-    private TreeNode getNode(TreeNode node, E e) {
+    private TreeNode getNode(TreeNode node, K key) {
         if(node == null) {
             return null;
         }
 
-        if(e.compareTo(node.e) < 0) {
-            return getNode(node.left, e);
-        } else if(e.compareTo(node.e) > 0) {
-            return getNode(node.right, e);
-        } else {
-            return node;
-        }
-    }
-
-    @Override
-    public void add(E e) {
-        root = add(root, e);
-    }
-
-    //尝试在以node为根的二分搜索树种添加e
-    private TreeNode add(TreeNode node, E e) {
-        if(node == null) { //add
-            size++;
-            return new TreeNode(e);
-        }
-
-        if(e.compareTo(node.e) < 0) {
-            node.left = add(node.left, e);
-        } else if(e.compareTo(node.e) > 0) {
-            node.right = add(node.right, e);
+        if(key.compareTo(node.key) < 0) {
+            return getNode(node.left, key);
+        } else if(key.compareTo(node.key) > 0) {
+            return getNode(node.right, key);
         }
 
         return node;
     }
 
-    //得到以node为根的搜索树的最小结点
+    @Override
+    public void put(K key, V value) {
+        root = put(root, key, value);
+    }
+
+    private TreeNode put(TreeNode node, K key, V value) {
+        if(root == null) {
+            size++;
+            return new TreeNode(key, value);
+        }
+
+        if(key.compareTo(node.key) < 0) {
+            node.left = put(node.left, key, value);
+        } else if(key.compareTo(node.key) > 0) {
+            node.right = put(node.right, key, value);
+        } else {//equals do override
+            node.value = value;
+            return node;
+        }
+
+        return node;
+    }
+
     private TreeNode getMinNode(TreeNode node) {
         if(node == null) {
             return null;
@@ -61,13 +58,14 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
         return pNode;
     }
 
-    //删除以node为根结点的搜索树的最小结点,返回删除了最小结点之后的新node
+
+    //return removed minNode -> node
     private TreeNode removeMinNode(TreeNode node) {
         if(node == null) {
             return null;
         }
 
-        if(node.left == null) {//remove
+        if(node.left == null) {
             TreeNode newNode = node.right;
             node.right = null;
             size--;
@@ -78,24 +76,22 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
         return node;
     }
 
+
     @Override
-    public void remove(E e) {
-        if(contains(e)) {
-            root = remove(root, e);
-        }
+    public void remove(K key) {
+        root = remove(root, key);
     }
 
-    //在根节点为node的搜索树中删除e, 并返回删除了e之后的新node
-    private TreeNode remove(TreeNode node, E e) {
+    private TreeNode remove(TreeNode node, K key) {
         if(node == null) {
             return null;
         }
 
-        if(e.compareTo(node.e) < 0) {
-            node.left = remove(node.left, e);
-        } else if(e.compareTo(node.e) > 0) {
-            node.right = remove(node.right, e);
-        } else {//remove
+        if(key.compareTo(node.key) < 0) {
+            node.left = remove(node.left, key);
+        } else if(key.compareTo(node.key) > 0) {
+            node.right = remove(node.right, key);
+        } else {//delete
             if(node.left == null) {//no left
                 TreeNode newNode = node.right;
                 node.right = null; //let gc
@@ -122,9 +118,15 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
     }
 
     @Override
-    public boolean contains(E e) {
-        TreeNode node = getNode(root, e);
+    public boolean containsKey(K key) {
+        TreeNode node = getNode(root, key);
         return node != null;
+    }
+
+    @Override
+    public V get(K key) {
+        TreeNode node = getNode(root, key);
+        return node == null ? null : node.value;
     }
 
     @Override
@@ -138,23 +140,25 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
     }
 
 
-    private class TreeNode {
-        E e;
+    private class TreeNode{
+        K key;
+        V value;
         TreeNode left;
         TreeNode right;
 
-        public TreeNode(E e, TreeNode left, TreeNode right) {
-            this.e = e;
+        public TreeNode(K key, V value, TreeNode left, TreeNode right) {
+            this.key = key;
+            this.value = value;
             this.left = left;
             this.right = right;
         }
 
-        public TreeNode(E e) {
-            this.e = e;
+        public TreeNode(K key, V value) {
+            this.key = key;
+            this.value = value;
         }
 
         public TreeNode() {
-
         }
     }
 }

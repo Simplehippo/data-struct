@@ -13,6 +13,7 @@ public class LinkedListSet<E> implements Set<E> {
     public void add(E e) {
         if(!contains(e)) {
             dummyHead.next = new Node(e, dummyHead.next);
+            size++;
         }
     }
 
