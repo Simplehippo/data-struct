@@ -28,7 +28,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     private TreeNode put(TreeNode node, K key, V value) {
-        if(root == null) {
+        if(node == null) {
             size++;
             return new TreeNode(key, value);
         }
