@@ -1,6 +1,4 @@
-package tree;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
+package bst_tree;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
